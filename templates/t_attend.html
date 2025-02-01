@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Attendance</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Styles for large screens */
+        @media (min-width: 992px) {
+            .vertical-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f8f8;
+                overflow-y: auto;
+                padding-top: 30px;
+            }
+
+            li {
+                border-bottom: 2px solid black;
+            }
+
+            li:hover {
+                background-color: blueviolet;
+            }
+
+            .content {
+                margin-left: 220px;
+                margin-top: 60px;
+                overflow-x: hidden;
+            }
+
+            .align {
+                margin-left: 280px;
+            }
+            
+            .container {
+                width: 50%;
+            }
+        }
+
+        /* General container styles */
+        .container {
+            background-color: whitesmoke;
+            height: auto;
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form styling */
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .btn-outline-success {
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Responsive adjustments for screens smaller than 992px */
+        @media (max-width: 991px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(179, 215, 245);">
+        <a class="navbar-brand" style="color: blue; font-size: xx-large;font-weight: bolder;" href="#">Alpha Tution Centre</a>
+        <button class="btn btn-danger">Log Out</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto flex-column vertical-nav mt-3" style="background-color:rgb(179, 215, 245);">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'admin' %}">Admin Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'add_course' %}">Add Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'managecourse' %}">Manage Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'tcr_table' %}">Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'assign' %}">Assign Teacher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 't_attend' %}">Teacher Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'std_table' %}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'view_sattendance' %}">Student Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'vta' %}">View Teacher Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'approvedisapprove' %}">Approve and Disapprove</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    
+
+    <h1 style="text-align: center; margin-bottom: 40px;">Teacher Attendance</h1>
+
+    <div class="container">
+      <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-danger mt-1">
+                <h5>{{ message }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+        <form action="{% url 't_attenddb' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="tsa">Select Teacher</label>
+                <select name="tsa" id="tsa">
+                    {% for t in tcr %}
+                        <option value="{{ t.id }}">{{ t.first_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date">
+            </div>
+
+            <div class="form-group">
+                <label>Attendance</label><br>
+                <input type="radio" value="Present" name="Attendance" id="present"> Present
+                <input type="radio" value="Absent" name="Attendance" id="absent"> Absent
+            </div>
+
+            <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+

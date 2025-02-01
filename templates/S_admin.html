@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Syllabus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Sidebar styling for larger screens */
+        @media (min-width: 992px) {    
+            .vertical-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f8f8;
+                overflow-y: auto;
+                padding-top: 30px;
+            }
+            li {
+                border-bottom: 2px solid black;
+            }
+            li:hover {
+                background-color: blueviolet;
+            }
+            .content {
+                margin-left: 220px;
+                margin-top: 10px;
+                overflow-x: hidden;
+            }
+        }
+
+        /* Card styling */
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        /* Styling the welcome message */
+        .welcome-msg {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(179, 215, 245);">
+    <a class="navbar-brand" style="color: blue; font-size: xx-large; font-weight: bolder;" href="#">Alpha Tuition Centre</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger" role="button">Log Out</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto flex-column vertical-nav mt-3" style="background-color: rgb(179, 215, 245);">
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'S_admin' %}">
+                    <i class="fas fa-user"></i> {{ user.first_name }}
+                </a> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'student_view_own_attendance' %}">
+                    <i class="fas fa-calendar-check"></i> View Attendance
+                </a>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black;" href="{% url 'student_view_task' %}">
+                        <i class="fas fa-tasks"></i> Submit Task
+                    </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'syllabus' %}">
+                    <i class="fas fa-book"></i> View Syllabus
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'student_profile' %}">
+                    <i class="fas fa-id-card"></i> View Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'reset_password2' %}">
+                    <i class="fas fa-lock"></i> Reset Password
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Area -->
+<div class="content">
+    <div class="container">
+        <!-- Welcome Message -->
+        <div class="welcome-msg">
+            <h1>Welcome, {{ user.first_name }}!</h1>
+            <p>Manage your profile, attendance, and syllabus here.</p>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="row">
+            <!-- Attendance Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-calendar-check"></i> View Attendance</h2>
+                        <p class="card-text">Check your attendance records here.</p>
+                        <a href="{% url 'student_view_own_attendance' %}" class="btn btn-primary">Go to Attendance</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Syllabus Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-book"></i> View Syllabus</h2>
+                        <p class="card-text">Explore the syllabus for your courses.</p>
+                        <a href="{% url 'syllabus' %}" class="btn btn-primary">Go to Syllabus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-id-card"></i> View Profile</h2>
+                        <p class="card-text">Update your profile and view details.</p>
+                        <a href="{% url 'student_profile' %}" class="btn btn-primary">Go to Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reset Password Card -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-lock"></i> Reset Password</h2>
+                        <p class="card-text">Change your password to keep your account secure.</p>
+                        <a href="{% url 'reset_password2' %}" class="btn btn-primary">Reset Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

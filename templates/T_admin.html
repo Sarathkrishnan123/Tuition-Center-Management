@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Admin - Alpha Tuition Centre</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @media (min-width:992px) {    
+            .vertical-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f8f8;
+                overflow-y: auto;
+                padding-top: 30px;
+            }
+            li {
+                border-bottom: 2px solid black;
+            }
+            li:hover {
+                background-color: blueviolet;
+                color: white;
+            }
+            .nav-link {
+                display: flex;
+                align-items: center;
+            }
+            .nav-link i {
+                margin-right: 8px;
+            }
+            .content {
+                margin-left: 220px;
+                margin-top: 60px;
+                overflow-x: hidden;
+                padding: 20px;
+            }
+            .card {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                border: none;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+        }
+        .navbar-brand {
+            font-size: xx-large;
+            font-weight: bolder;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(179, 215, 245);">
+    <a class="navbar-brand" style="color: blue;"  href="#">Alpha Tuition Centre</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger" role="button">Log Out</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto flex-column vertical-nav mt-3" style="background-color: rgb(179, 215, 245);">
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="#">
+                    <i class="fas fa-user"></i> {{ user.username }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'mark_attendance' %}">
+                    <i class="fas fa-calendar-check"></i> Mark Attendance
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_attendance' %}">
+                    <i class="fas fa-eye"></i> View Attendance
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'my_attendance' %}">
+                    <i class="fas fa-user-check"></i> My Attendance
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'task' %}">
+                    <i class="fas fa-tasks"></i> Assign Task
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_task' %}">
+                    <i class="fas fa-clipboard-list"></i> View Task
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_syllabus' %}">
+                    <i class="fas fa-book"></i> View Syllabus
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_students' %}">
+                    <i class="fas fa-users"></i> Students
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_submitted_tasks' %}">
+                    <i class="fas fa-check-square"></i> Submitted Tasks
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'reset_password' %}">
+                    <i class="fas fa-lock"></i> Reset Password
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Area -->
+<div class="content">
+    <div class="container">
+        <h2 class="mb-4">Teacher Admin Dashboard</h2>
+        <div class="row">
+            <!-- Card for Mark Attendance -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-calendar-check"></i> Mark Attendance</h5>
+                        <p class="card-text">Record attendance for your assigned classes.</p>
+                        <a href="{% url 'mark_attendance' %}" class="btn btn-primary">Go to Mark Attendance</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for View Attendance -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-eye"></i> View Attendance</h5>
+                        <p class="card-text">Check attendance records.</p>
+                        <a href="{% url 'view_attendance' %}" class="btn btn-primary">View Attendance</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Assign Task -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-tasks"></i> Assign Task</h5>
+                        <p class="card-text">Assign tasks to students.</p>
+                        <a href="{% url 'task' %}" class="btn btn-primary">Assign Task</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for View Submitted Tasks -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-check-square"></i> Submitted Tasks</h5>
+                        <p class="card-text">Review submitted tasks.</p>
+                        <a href="{% url 'view_submitted_tasks' %}" class="btn btn-primary">View Submitted Tasks</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for View Students -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-users"></i> Students</h5>
+                        <p class="card-text">Manage your students.</p>
+                        <a href="{% url 'view_students' %}" class="btn btn-primary">View Students</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Reset Password -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fas fa-lock"></i> Reset Password</h5>
+                        <p class="card-text">Change your account password.</p>
+                        <a href="{% url 'reset_password' %}" class="btn btn-primary">Reset Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

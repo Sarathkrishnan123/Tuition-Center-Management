@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @media (min-width:992px) {   
+            .nav-link{
+                font-size: large;
+                background: white;
+                
+            }
+            .container{
+                background-color: whitesmoke;
+                margin-top: 30px;
+            }
+            .card-img-top{
+              height: 10rem;
+                
+            } 
+            
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: blue;">
+        <a class="navbar-brand" style="color: white; font-size: xx-large;font-weight: bolder;" href="#">Alpha Tution Centre</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link"   href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"   href="{% url 'log' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"   href="{% url 'teacher' %}">Teacher Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"   href="{% url 'student' %}">Student Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <h2 style="text-align: center; margin-top: 15px;">Welcome to Alpha Tuition Centre – Your Pathway to Academic and Professional Excellence!</h2>
+      <p style="margin: 10px;">At Alpha, we are dedicated to nurturing the future of young minds by offering top-notch coaching for students from <b>8th grade to Plus Two (12th grade)</b>, covering both State and CBSE syllabuses. Our expert faculty ensures personalized attention, focusing on building a strong foundation in key subjects, fostering academic excellence, and preparing students for success in exams and beyond.
+
+        But that's not all! At Alpha, we also provide specialized training in the latest in-demand software courses, including <b>Python Full Stack Development, MEAN/MERN Stack, and Digital Marketing</b>. These courses are designed to equip students and professionals with industry-relevant skills, preparing them for the evolving job market.
+        
+        Whether you're looking to excel academically or advance in the world of technology, Alpha Tuition Centre offers the perfect blend of academic and professional learning opportunities. Join us at Alpha, where your journey towards success begins today!
+        
+        
+        
+        
+      </p>
+      </div>
+      <h2 style="text-align: center;margin-top: 40px;">Our Courses</h2>
+      <div class="card-group p-3">
+        <div class="card m-4  border border-dark">
+          <img class="card-img-top" src="https://schools.olympiadsuccess.com/assets/images/schools_board/board_21.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">8th to 12th All Subject tution(State Syllabus)</h5>
+            <p class="card-text">Alpha Tuition Centre provides comprehensive coaching for students following the State syllabus from 8th to 12th grade. Our experienced teachers focus on subject clarity, problem-solving techniques, and exam preparation, ensuring students achieve academic success.</p>
+          
+          </div>
+        </div>
+        <div class="card m-4 border border-dark">
+          <img class="card-img-top" src="https://www.2classnotes.com/wp-content/uploads/2017/09/CBSE-Logo.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">8th to 12th All Subject tution(CBSE Syllabus)</h5>
+            <p class="card-text">For students pursuing the CBSE syllabus, we offer dedicated batches with personalized attention. Our curriculum covers all essential topics, helping students master complex concepts and excel in their board exams with confidence.</p>
+          
+          </div>
+        </div>
+        <div class="card m-4  border border-dark">
+          <img class="card-img-top" src="https://images.cdn.kukufm.com/f:webp/https://s3.ap-south-1.amazonaws.com/kukufm/channel_icons/dc2516e84eef404e80c49a8b91b11138.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Spoken English</h5>
+            <p class="card-text">Our Spoken English training program is designed to enhance communication skills, focusing on fluency, grammar, and pronunciation. This course helps students and professionals gain confidence in both academic and professional environments.</p>
+            
+          </div>
+        </div>
+      </div>
+      <div class="card-group p-3">
+        <div class="card m-4  border border-dark">
+          <img class="card-img-top" src="https://www.slaconsultantsindia.com/wp_files/wp-content/uploads/2018/12/Python-Full-Stack-Developer-Training-in-Delhi-NCR.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Python Full Stack</h5>
+            <p class="card-text">In the Python Full Stack course, students learn both front-end and back-end development. This hands-on program covers HTML, CSS, JavaScript, Python, and frameworks like Django, preparing learners for a career in web development.</p>
+
+          </div>
+        </div>
+        <div class="card m-4  border border-dark">
+          <img class="card-img-top" src="https://www.achieversit.com/management/uploads/course_image/mean-img1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">MERN/MEAN Stack</h5>
+            <p class="card-text">Our MEAN/MERN Stack course provides training in cutting-edge technologies such as MongoDB, Express.js, Angular/React, and Node.js. This course equips students with the skills needed to build powerful, full-stack web applications.</p>
+           
+          </div>
+        </div>
+        <div class="card m-4  border border-dark">
+          <img class="card-img-top" src="https://digiskillzz.com/wp-content/uploads/2023/02/digital-marketing-course-in-india-1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Digital Marketing</h5>
+            <p class="card-text">The Digital Marketing course at Alpha covers essential topics like SEO, social media marketing, content strategy, and Google Ads. Perfect for aspiring marketers, this course helps students build strong foundations in online marketing.
+
+            </p>
+        
+          </div>
+        </div>
+      </div>
+      
+</body>
+</html>

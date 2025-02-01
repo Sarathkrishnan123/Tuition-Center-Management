@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @media (min-width:992px) {    
+            .vertical-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f8f8;
+                overflow-y: auto;
+                padding-top: 30px
+              }
+              li{
+                border-bottom: 2px solid black;
+                
+              }
+              li:hover{
+                background-color: blueviolet;
+              }
+             .content{
+               margin-left:220px;
+               margin-top:60px;
+               overflow-x: hidden;
+             }
+             .align{
+              margin-left: 280px;
+             }
+             .table{
+                width: 80%;
+                margin-left: 250px;
+             }
+            
+          }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(179, 215, 245);">
+        <a class="navbar-brand" style="color: blue; font-size: xx-large;font-weight: bolder;" href="#">Alpha Tution Centre</a>
+        <button class="btn btn-danger">Log Out</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto flex-column vertical-nav mt-3" style="background-color: rgb(179, 215, 245);">
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'admin' %}">Admin Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'add_course' %}">Add Course</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'managecourse' %}">Manage Course</a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'tcr_table' %}">Teachers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="#">Assign Teacher</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="Teacher_Attendance.html">Teacher Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="#">Students</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="#">Student Attendance</a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="#">View Teacher Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'approvedisapprove' %}">Approve and Disaaprove</a>
+              </li>
+          </ul>
+        </nav>
+          
+       
+          <h1 style="margin-top: 10px; text-align: center;">Teacher Attendance</h1>
+          <table class="table table-responsive-sm table-bordered mt-3">
+            <thead>
+              <tr>
+                <th style="width: 15%;" scope="col">Name</th>
+                <th style="width: 20%;" scope="col">Attendance Date</th>
+                <th style="width: 5%;" scope="col">Status</th>
+                
+               
+              </tr>
+            </thead>
+            <tbody>
+                {% for a in atd %}
+                <tr>
+                    <td>{{ a.teacher_name.first_name }}</td>
+                    <td>{{ a.Date }}</td>
+                    <td>{{ a.Attendance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+          </table>
+     
+</body>
+</html>

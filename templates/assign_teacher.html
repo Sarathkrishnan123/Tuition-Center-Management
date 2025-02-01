@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @media (min-width:992px) { 
+
+            .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensures it stays on top */
+        }
+
+            .vertical-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f8f8;
+                overflow-y: auto;
+                padding-top: 30px
+              }
+              
+              li{
+                border-bottom: 2px solid black;
+                
+              }
+              li:hover{
+                background-color: blueviolet;
+              }
+             .content{
+               margin-left:220px;
+               margin-top:60px;
+               overflow-x: hidden;
+             }
+             .align{
+              margin-left: 280px;
+             }
+             .table{
+                width: 80%;
+                margin-left: 250px;
+             }
+            
+          }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(179, 215, 245);">
+        <a class="navbar-brand" style="color: blue; font-size: xx-large;font-weight: bolder;" href="#">Alpha Tution Centre</a>
+        <button class="btn btn-danger">Log Out</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto flex-column vertical-nav mt-3" style="background-color: rgb(179, 215, 245);">
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'admin' %}">Admin Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'add_course' %}">Add Course</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'managecourse' %}">Manage Course</a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'tcr_table' %}">Teachers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: black;" href="{% url 'assign' %}">Assign Teacher</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 't_attend' %}">Teacher Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'std_table' %}">Students</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'view_sattendance' %}">Student Attendance</a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'vta' %}">View Teacher Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: black;" href="{% url 'approvedisapprove' %}">Approve and Disaaprove</a>
+              </li>
+          </ul>
+        </nav>
+          
+       
+          <h1 style="margin-top: 75px; text-align: center;">Assign Teacher</h1>
+          <table class="table table-responsive-sm table-bordered mt-3">
+           
+              <tr>
+                <th style="width: 20%; text-align: center;" scope="col">Student</th>
+                <th style="width: 20%; text-align: center;" scope="col">Course</th>
+                <th style="width: 20%; text-align: center;" scope="col">Teacher</th>
+                <th style="width: 20%; text-align: center;" scope="col">Current Teacher</th>
+                <th scope="col" style="width: 20%;text-align: center;" >Action</th>
+               
+              </tr>
+              {% for s in student %}
+              <tr style="width: 50px; text-align: center;">
+                <td>{{s.user.first_name}}</td>
+                <td>{{s.course.course_name}}</td>
+                <td>
+                    <select name="se" id="teacher_select_{{s.user.id}}">
+                        {% for t in teacher %}
+                        {% if t.course.id == s.course.id %}
+                        <option value="{{t.user.id}}">{{t.user.first_name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>{{s.teacher.username}}</td>
+                <td><button type="button" onclick="assignteacher('{{s.user.id}}')" class="button-4">Assign</button></td>
+              </tr>
+              {% endfor %}
+           
+          </table>
+          <script>
+            function assignteacher(studentId){
+              teacherId=document.getElementById('teacher_select_' + studentId).value;
+              var url = `/assign_teacher/${studentId}/${teacherId}/`;
+              window.location.href = url;
+            }
+          </script>
+     
+</body>
+</html>
